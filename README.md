@@ -62,3 +62,36 @@ IEnumerable<ICommand> commands = container.GetAllInstances<ICommand>();
 // Alternatively, you can use the weakly typed version
 IEnumerable<object> commands = container.GetAllInstances(typeof(ICommand));
 ```
+Еще несколько примеров перегрузки Register
+1) Настройка одного экземпляра, созданного вручную (Singleton) для постоянного возврата:
+```
+// Configuration
+container.RegisterInstance<IUserRepository>(new SqlUserRepository());
+
+// Usage
+IUserRepository repository = container.GetInstance<IUserRepository>();
+```
+
+2) Настройка одного экземпляра с помощью делегата:
+```
+// Configuration
+container.Register<IUserRepository>(
+    () => new SqlUserRepository("some constr"),
+    Lifestyle.Singleton);
+
+// Usage
+IUserRepository repository = container.GetInstance<IUserRepository>();
+```
+
+3) Настройка автоматически созданного нового экземпляра для возврата:
+```
+// Configuration
+container.Register<IHandler<MoveCustomerCommand>, MoveCustomerHandler>();
+
+// Alternatively you can supply the transient Lifestyle with the same effect.
+container.Register<IHandler<MoveCustomerCommand>, MoveCustomerHandler>(
+    Lifestyle.Transient);
+
+// Usage
+var handler = container.GetInstance<IHandler<MoveCustomerCommand>>();
+```
