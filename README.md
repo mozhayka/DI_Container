@@ -36,7 +36,8 @@ D: Dependency Inversion Principle (Принцип инверсии зависи�
 Рассмотрим функционал на примере [Simple Injector](https://docs.simpleinjector.org/en/latest/using.html)
 
 Основным типом является класс Container. Экземпляр Container используется для регистрации сопоставлений между каждой абстракцией (сервисом) и соответствующей ей реализацией (компонентом).
-Регистрация происходит с помощью вызова перегрузки Register
+
+#### Регистрация происходит с помощью вызова перегрузки Register
 ```
 var container = new SimpleInjector.Container();
 
@@ -47,7 +48,7 @@ container.Register<ILogger, FileLogger>();
 ILogger logger = container.GetInstance<ILogger>();
 ```
 
-Simple Injector поддерживает два сценария извлечения экземпляров компонентов:
+#### Simple Injector поддерживает два сценария извлечения экземпляров компонентов:
 1) Получение объекта заданным типом
 ```
 var repository = container.GetInstance<IUserRepository>();
@@ -62,7 +63,7 @@ IEnumerable<ICommand> commands = container.GetAllInstances<ICommand>();
 // Alternatively, you can use the weakly typed version
 IEnumerable<object> commands = container.GetAllInstances(typeof(ICommand));
 ```
-Еще несколько примеров перегрузки Register
+#### Еще несколько примеров перегрузки Register
 1) Настройка одного экземпляра, созданного вручную (Singleton) для постоянного возврата:
 ```
 // Configuration
@@ -101,4 +102,30 @@ var handler = container.GetInstance<IHandler<MoveCustomerCommand>>();
 // Configuration
 Assembly[] assemblies = // determine list of assemblies to search in
 container.Register(typeof(IHandler<>), assemblies);
+```
+
+#### Коллекции
+Помимо создания сопоставлений один к одному между абстракцией и реализацией, Simple Injector позволяет регистрировать набор реализаций для данной абстракции. Затем эти реализации могут быть запрошены из контейнера в виде коллекции экземпляров. Simple Injector содержит специальные методы для регистрации и разрешения коллекций типов.
+```
+// Configuration
+// Registering a list of instances that will be created by the container.
+// Supplying a collection of types is the preferred way of registering collections.
+container.Collection.Register<ILogger>(typeof(MailLogger), typeof(SqlLogger));
+
+// Register a fixed list (these instances should be thread-safe).
+container.Collection.Register<ILogger>(new MailLogger(), new SqlLogger());
+
+// Using a collection from another subsystem
+container.Collection.Register<ILogger>(Logger.Providers);
+
+// Usage
+IEnumerable<ILogger> loggers = container.GetAllInstances<ILogger>();
+```
+Можно добавлять элементы в коллекцию так же с помощью Collection.Append:
+```
+container.Register<ILogger, FileLogger>();
+
+container.Collection.Append<ILogger, MailLogger>(Lifestyle.Singleton);
+container.Collection.Append<ILogger, SqlLogger>();
+container.Collection.AppendInstance<ILogger>(new FileLogger>());
 ```
