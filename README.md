@@ -46,3 +46,19 @@ container.Register<ILogger, FileLogger>();
 // Request instance
 ILogger logger = container.GetInstance<ILogger>();
 ```
+
+Simple Injector поддерживает два сценария извлечения экземпляров компонентов:
+1) Получение объекта заданным типом
+```
+var repository = container.GetInstance<IUserRepository>();
+
+// Alternatively, you can use the weakly typed version
+var repository = (IUserRepository)container.GetInstance(typeof(IUserRepository));
+```
+2) Получение коллекции объектов по их типу
+```
+IEnumerable<ICommand> commands = container.GetAllInstances<ICommand>();
+
+// Alternatively, you can use the weakly typed version
+IEnumerable<object> commands = container.GetAllInstances(typeof(ICommand));
+```
