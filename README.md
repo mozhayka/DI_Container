@@ -36,3 +36,13 @@ D: Dependency Inversion Principle (Принцип инверсии зависи�
 Рассмотрим функционал на примере [Simple Injector](https://docs.simpleinjector.org/en/latest/using.html)
 
 Основным типом является класс Container. Экземпляр Container используется для регистрации сопоставлений между каждой абстракцией (сервисом) и соответствующей ей реализацией (компонентом).
+Регистрация происходит с помощью вызова перегрузки Register
+```
+var container = new SimpleInjector.Container();
+
+// Registrations here
+container.Register<ILogger, FileLogger>();
+
+// Request instance
+ILogger logger = container.GetInstance<ILogger>();
+```
