@@ -95,3 +95,10 @@ container.Register<IHandler<MoveCustomerCommand>, MoveCustomerHandler>(
 // Usage
 var handler = container.GetInstance<IHandler<MoveCustomerCommand>>();
 ```
+
+4) Авторегистрация/Пакетная регистрация:
+```
+// Configuration
+Assembly[] assemblies = // determine list of assemblies to search in
+container.Register(typeof(IHandler<>), assemblies);
+```
