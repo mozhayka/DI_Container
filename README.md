@@ -129,3 +129,9 @@ container.Collection.Append<ILogger, MailLogger>(Lifestyle.Singleton);
 container.Collection.Append<ILogger, SqlLogger>();
 container.Collection.AppendInstance<ILogger>(new FileLogger>());
 ```
+
+Автоматическая регистрация коллекций
+```
+Assembly[] assemblies = // determine list of assemblies to search in
+container.Collection.Register<ILogger>(assemblies);
+```
