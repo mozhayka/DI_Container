@@ -1,5 +1,4 @@
-﻿using Container.Examples;
-using System;
+﻿using System;
 
 namespace Container
 {
@@ -7,7 +6,7 @@ namespace Container
     {
         static void Main(string[] args)
         {
-            IExamples example = new Examples.Examples();
+            IExamples example = new Examples();
             example.RunAll();
         }
     }

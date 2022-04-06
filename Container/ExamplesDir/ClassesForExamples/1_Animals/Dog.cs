@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Container.Examples.Animals
+namespace Container
 {
-    class Cat : IAnimal
+    class Dog : IAnimal
     {
-        public Cat()
+        public Dog()
         {
-            Console.WriteLine("New Cat");
+            Console.WriteLine("New Dog");
         }
 
         public void Voice()
         {
-            Console.WriteLine("Maw");
+            Console.WriteLine("Gav");
         }
     }
 }

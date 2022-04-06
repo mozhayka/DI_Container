@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Container.Examples.Animals
+namespace Container
 {
-    interface IAnimal
+    class Car1 : ICar
     {
-        public void Voice();
+        public void Beep()
+        {
+            Console.WriteLine("Beep");
+        }
     }
 }

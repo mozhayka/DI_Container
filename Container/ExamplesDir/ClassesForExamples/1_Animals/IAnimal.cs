@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Container
 {
-    interface IExamples
+    interface IAnimal
     {
-        public void RunAll();
+        public void Voice();
     }
 }

@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Container
 {
-    interface IExamples
+    class Car2 : ICar
     {
-        public void RunAll();
+        public void Beep()
+        {
+            Console.WriteLine("Beep Beep");
+        }
     }
 }
