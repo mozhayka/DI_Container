@@ -13,6 +13,8 @@ namespace Container
         {
             TestSimpleBound();
             TestBoundTwoInterfaces();
+            TestDoubleGetInstance();
+            TestReflectionContainer();
         }
 
         private void NewTest()
@@ -26,7 +28,8 @@ namespace Container
 
             container.Register<IAnimal, Cat>();
 
-            IAnimal animal = container.GetInstance<IAnimal>();
+            var animal = container.GetInstance<IAnimal>();
+
             animal.Voice();
 
             NewTest();
@@ -45,6 +48,33 @@ namespace Container
             var car = container.GetInstance<ICar>();
             animal.Voice();
             car.Beep();
+
+            NewTest();
+        }
+
+        public void TestDoubleGetInstance()
+        {
+            MyContainer container = new();
+
+            container.Register<IAnimal, Cat>();
+
+            var animal = container.GetInstance<IAnimal>();
+            var animal2 = container.GetInstance<IAnimal>();
+            animal2.Voice();
+
+            NewTest();
+        }
+
+        public void TestReflectionContainer()
+        {
+            MyReflectionContainer container = new();
+
+            container.Register<IAnimal, Cat>();
+
+            var cat1 = container.GetInstance<IAnimal>();
+            var cat2 = container.GetInstance<IAnimal>();
+
+            cat1.Voice();
 
             NewTest();
         }

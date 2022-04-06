@@ -8,7 +8,13 @@ namespace Container
 {
     interface IContainer
     {
-        public void Register<Interface, Realization>() where Realization : new();
+        public enum Lifestyle
+        {
+            Singleton,
+            Transient
+        }
+
+        public void Register<Interface, Realization>(Lifestyle lifestyle) where Realization : new();
         public Interface GetInstance<Interface>();
     }
 }

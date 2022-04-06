@@ -7,37 +7,28 @@ using static Container.IContainer;
 
 namespace Container
 {
-    class MyContainer : IContainer
+    class MyReflectionContainer : IContainer
     {
-        readonly Dictionary<Type, Object> container;
-        public MyContainer()
+        readonly Dictionary<Type, Type> container;
+        public MyReflectionContainer()
         {
             container = new();
         }
-
         public Interface GetInstance<Interface>()
         {
             if (!container.ContainsKey(typeof(Interface)))
                 throw new Exception("Interface is not registered");
-            
-            return (Interface) container[typeof(Interface)];
+
+            var constructor = container[typeof(Interface)].GetConstructor(new Type[] { });
+            return (Interface) constructor.Invoke(new object[] { });
         }
 
-        public void Register<Interface, Realization>(Lifestyle lifestyle = Lifestyle.Singleton) where Realization : new()
+        public void Register<Interface, Realization>(IContainer.Lifestyle lifestyle = Lifestyle.Singleton) where Realization : new()
         {
             if (!typeof(Interface).IsAssignableFrom(typeof(Realization)))
                 throw new Exception("Its not realization of this interface");
 
-            if (lifestyle == Lifestyle.Singleton)
-            {
-                container[typeof(Interface)] = new Realization();
-            }
-
-            if (lifestyle == Lifestyle.Transient)
-            {
-
-            }
+            container[typeof(Interface)] = typeof(Realization);
         }
-
     }
 }
