@@ -8,7 +8,7 @@ namespace Container.MyContainer
 {
     interface IContainer
     {
-        public void Register<Interface, Realization>();
-        public Type GetInstance<Interface>();
+        public void Register<Interface, Realization>() where Realization : new();
+        public Interface GetInstance<Interface>();
     }
 }
