@@ -7,7 +7,7 @@ using static Container.IContainer;
 
 namespace Container
 {
-    class MyContainer : IContainer
+ /*   class MyContainer : IContainer
     {
         readonly Dictionary<Type, Object> container;
         public MyContainer()
@@ -40,4 +40,5 @@ namespace Container
         }
 
     }
+ */
 }

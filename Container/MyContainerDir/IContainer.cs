@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Container
 {
-    interface IContainer
+    public interface IContainer
     {
         public enum Lifestyle
         {
@@ -14,7 +14,7 @@ namespace Container
             Transient
         }
 
-        public void Register<Interface, Realization>(Lifestyle lifestyle) where Realization : new();
+        public void Register<Interface, Realization>(Lifestyle lifestyle) where Realization : class;
         public Interface GetInstance<Interface>();
     }
 }

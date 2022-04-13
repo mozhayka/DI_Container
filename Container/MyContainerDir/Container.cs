@@ -7,13 +7,15 @@ using static Container.IContainer;
 
 namespace Container
 {
-    class MyReflectionContainer : IContainer
+    public class Container : IContainer
     {
         readonly Dictionary<Type, Type> container;
-        public MyReflectionContainer()
+
+        public Container()
         {
             container = new();
         }
+
         public Interface GetInstance<Interface>()
         {
             if (!container.ContainsKey(typeof(Interface)))
@@ -23,7 +25,7 @@ namespace Container
             return (Interface) constructor.Invoke(new object[] { });
         }
 
-        public void Register<Interface, Realization>(IContainer.Lifestyle lifestyle = Lifestyle.Singleton) where Realization : new()
+        public void Register<Interface, Realization>(Lifestyle lifestyle = Lifestyle.Singleton) where Realization : class
         {
             if (!typeof(Interface).IsAssignableFrom(typeof(Realization)))
                 throw new Exception("Its not realization of this interface");

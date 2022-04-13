@@ -11,9 +11,9 @@ namespace Container
     {
         public void RunAll()
         {
-            TestSimpleBound();
-            TestBoundTwoInterfaces();
-            TestDoubleGetInstance();
+            //TestSimpleBound();
+            //TestBoundTwoInterfaces();
+            //TestDoubleGetInstance();
             TestReflectionContainer();
         }
 
@@ -22,6 +22,7 @@ namespace Container
             Console.WriteLine("----------------------------");
         }
 
+        /*
         public void TestSimpleBound()
         {
             MyContainer container = new();
@@ -64,10 +65,11 @@ namespace Container
 
             NewTest();
         }
+        */
 
         public void TestReflectionContainer()
         {
-            MyReflectionContainer container = new();
+            Container container = new();
 
             container.Register<IAnimal, Cat>();
 
