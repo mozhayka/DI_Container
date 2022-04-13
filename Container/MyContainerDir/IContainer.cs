@@ -14,7 +14,10 @@ namespace Container
             Transient
         }
 
-        public void Register<Interface, Realization>(Lifestyle lifestyle) where Realization : class;
-        public Interface GetInstance<Interface>();
+        public void Register<Interface, Realization>(Lifestyle lifestyle) 
+            where Interface : class 
+            where Realization : class, Interface;
+        public Interface GetInstance<Interface>()
+            where Interface : class;
     }
 }

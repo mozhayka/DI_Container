@@ -11,10 +11,7 @@ namespace Container
     {
         public void RunAll()
         {
-            //TestSimpleBound();
-            //TestBoundTwoInterfaces();
-            //TestDoubleGetInstance();
-            TestReflectionContainer();
+            TestLifestyleTransient();
         }
 
         private void NewTest()
@@ -22,52 +19,7 @@ namespace Container
             Console.WriteLine("----------------------------");
         }
 
-        /*
-        public void TestSimpleBound()
-        {
-            MyContainer container = new();
-
-            container.Register<IAnimal, Cat>();
-
-            var animal = container.GetInstance<IAnimal>();
-
-            animal.Voice();
-
-            NewTest();
-        }
-
-        public void TestBoundTwoInterfaces()
-        {
-            MyContainer container = new();
-
-            container.Register<IAnimal, Dog>();
-
-            IAnimal animal = container.GetInstance<IAnimal>();
-
-            container.Register<ICar, Car2>();
-
-            var car = container.GetInstance<ICar>();
-            animal.Voice();
-            car.Beep();
-
-            NewTest();
-        }
-
-        public void TestDoubleGetInstance()
-        {
-            MyContainer container = new();
-
-            container.Register<IAnimal, Cat>();
-
-            var animal = container.GetInstance<IAnimal>();
-            var animal2 = container.GetInstance<IAnimal>();
-            animal2.Voice();
-
-            NewTest();
-        }
-        */
-
-        public void TestReflectionContainer()
+        public void TestLifestyleTransient()
         {
             Container container = new();
 

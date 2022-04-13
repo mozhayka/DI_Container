@@ -16,7 +16,8 @@ namespace Container
             container = new();
         }
 
-        public Interface GetInstance<Interface>()
+        public Interface GetInstance<Interface>() 
+            where Interface : class
         {
             if (!container.ContainsKey(typeof(Interface)))
                 throw new Exception("Interface is not registered");
@@ -25,12 +26,14 @@ namespace Container
             return (Interface) constructor.Invoke(new object[] { });
         }
 
-        public void Register<Interface, Realization>(Lifestyle lifestyle = Lifestyle.Singleton) where Realization : class
+        public void Register<Interface, Realization>(Lifestyle lifestyle = Lifestyle.Transient)
+            where Interface : class
+            where Realization : class, Interface
         {
-            if (!typeof(Interface).IsAssignableFrom(typeof(Realization)))
-                throw new Exception("Its not realization of this interface");
-
-            container[typeof(Interface)] = typeof(Realization);
+            if (lifestyle == Lifestyle.Transient)
+            {
+                container[typeof(Interface)] = typeof(Realization);
+            }
         }
     }
 }
