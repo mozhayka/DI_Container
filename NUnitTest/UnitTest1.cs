@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using NUnitTest.Classes;
+using System;
 
 namespace NUnitTest
 {
@@ -8,12 +9,12 @@ namespace NUnitTest
         [SetUp]
         public void Setup()
         {
-            Test1();
-            Test2();
+            TestTransient();
+            TestSingleton();
         }
 
         [Test]
-        public void Test1()
+        public void TestTransient()
         {
             var container = new Container.Container();
 
@@ -23,11 +24,12 @@ namespace NUnitTest
             var b = container.GetInstance<ICalc>();
             a.Step();
             b.Step();
+
             Assert.AreEqual(a.N, 2);
         }
 
         [Test]
-        public void Test2()
+        public void TestSingleton()
         {
             var container = new Container.Container();
 
@@ -37,6 +39,7 @@ namespace NUnitTest
             var b = container.GetInstance<ICalc>();
             a.Step();
             b.Step();
+
             Assert.AreEqual(a.N, 3);
         }
     }

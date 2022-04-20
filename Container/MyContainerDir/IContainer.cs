@@ -11,7 +11,8 @@ namespace Container
         public enum Lifestyle
         {
             Singleton,
-            Transient
+            Transient,
+            Scoped
         }
 
         public void Register<Interface, Realization>(Lifestyle lifestyle) 
