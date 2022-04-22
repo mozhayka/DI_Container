@@ -12,6 +12,7 @@ namespace Container.MyContainerDir
         Type IType, RType;
         Lifestyle lifestyle;
         Func<object> instanceCreator;
+        Dictionary<string, object> ScopedObjects = new();
 
         public InstanceProducer(Type interface_type, Type realization_type, Lifestyle lifestyle)
         {
@@ -37,7 +38,21 @@ namespace Container.MyContainerDir
                     var SingleObject = RType.GetConstructor(Array.Empty<Type>()).Invoke(Array.Empty<object>());
                     instanceCreator = () => SingleObject;
                     break;
+                case Lifestyle.Scoped:
+                    instanceCreator = () => InstanceCreatorScoped();
+                    break;
             }
+        }
+
+        private object InstanceCreatorScoped()
+        {
+            var scope = Scope.GetScope();
+            if (!ScopedObjects.ContainsKey(scope))
+            {
+                var SingleObject = RType.GetConstructor(Array.Empty<Type>()).Invoke(Array.Empty<object>());
+                ScopedObjects[scope] = SingleObject;
+            }
+            return ScopedObjects[scope];
         }
     }
 }
