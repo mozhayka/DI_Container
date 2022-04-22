@@ -39,7 +39,7 @@ namespace Container
 
             if (ScopedObjects.ContainsKey(typeof(Interface)))
             {
-                var env = Environment.CommandLine;
+                var env = Environment.CurrentDirectory;
                 if (!ScopedObjects[typeof(Interface)].ContainsKey(env))
                 {
                     var constructor = container[typeof(Interface)].GetConstructor(new Type[] { });
@@ -54,21 +54,46 @@ namespace Container
             where Interface : class
             where Realization : class, Interface
         {
+            switch (lifestyle)
+            {
+                case Lifestyle.Transient:
+                    RegisterTransient<Interface, Realization>();
+                    break;
+                case Lifestyle.Singleton:
+                    RegisterSingleton<Interface, Realization>();
+                    break;
+                case Lifestyle.Scoped:
+                    RegisterScoped<Interface, Realization>();
+                    break;
+            }
+        }
+
+        public void RegisterTransient<Interface, Realization>()
+            where Interface : class
+            where Realization : class, Interface
+        {
             container[typeof(Interface)] = typeof(Realization);
-            if (lifestyle == Lifestyle.Transient)
-            {
-                var constructor = typeof(Realization).GetConstructor(new Type[] { });
-                TransientObjects[typeof(Interface)] = constructor;
-            }
-            if (lifestyle == Lifestyle.Singleton)
-            {
-                var constructor = typeof(Realization).GetConstructor(new Type[] { });
-                SingletonObjects[typeof(Interface)] = constructor.Invoke(new object[] { });
-            }
-            if (lifestyle == Lifestyle.Scoped)
-            {
-                ScopedObjects[typeof(Interface)] = new();
-            }
+            var constructor = typeof(Realization).GetConstructor(new Type[] { });
+            TransientObjects[typeof(Interface)] = constructor;
+        }
+
+        public void RegisterSingleton<Interface, Realization>()
+            where Interface : class
+            where Realization : class, Interface
+        {
+            container[typeof(Interface)] = typeof(Realization);
+            var constructor = typeof(Realization).GetConstructor(new Type[] { });
+            SingletonObjects[typeof(Interface)] = constructor.Invoke(new object[] { });
+        }
+
+        public void RegisterScoped<Interface, Realization>()
+            where Interface : class
+            where Realization : class, Interface
+        {
+            container[typeof(Interface)] = typeof(Realization);
+            var constructor = typeof(Realization).GetConstructor(new Type[] { });
+            //SingletonObjects[typeof(Interface)] = constructor.Invoke(new object[] { });
+            ScopedObjects[typeof(Interface)] = new();
         }
     }
 }

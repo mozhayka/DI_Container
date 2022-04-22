@@ -18,6 +18,7 @@ namespace Container
         public void Register<Interface, Realization>(Lifestyle lifestyle) 
             where Interface : class 
             where Realization : class, Interface;
+
         public Interface GetInstance<Interface>()
             where Interface : class;
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Container
 {
-    class Examples : IExamples
+    class Examples
     {
         public void RunAll()
         {

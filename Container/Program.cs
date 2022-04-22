@@ -6,7 +6,7 @@ namespace Container
     {
         static void Main(string[] args)
         {
-            IExamples example = new Examples();
+            Examples example = new();
             example.RunAll();
         }
     }
