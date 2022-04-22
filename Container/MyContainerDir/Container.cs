@@ -10,20 +10,10 @@ namespace Container
 {
     public class Container : IContainer
     {
-        Dictionary<Type, Type> container;
-        readonly Dictionary<Type, System.Reflection.ConstructorInfo> TransientConstructors;
-        readonly Dictionary<Type, object> SingletonObjects;
-
-        readonly Dictionary<Type, System.Reflection.ConstructorInfo> ScopedConstructors;
-        readonly Dictionary<Type, Dictionary<string, object>> ScopedObjects;
         readonly Dictionary<Type, InstanceProducer> instances;
 
         public Container()
         {
-            container = new();
-            TransientConstructors = new();
-            SingletonObjects = new();
-            ScopedObjects = new();
             instances = new();
         }
 

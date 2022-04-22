@@ -10,7 +10,7 @@ namespace NUnitTest.Classes
     {
         public int N { get; private set; }
 
-        Mult()
+        public Mult()
         {
             N = 2;
         }

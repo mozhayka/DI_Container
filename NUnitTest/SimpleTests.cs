@@ -28,7 +28,7 @@ namespace NUnitTest
             a.Step();
             b.Step();
 
-            Assert.AreEqual(a.N, 2);
+            Assert.AreEqual(2, a.N);
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace NUnitTest
             a.Step();
             b.Step();
 
-            Assert.AreEqual(a.N, 3);
+            Assert.AreEqual(3, a.N);
         }
     }
 }

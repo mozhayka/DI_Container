@@ -30,7 +30,7 @@ namespace NUnitTest
             a.Step();
             b.Step();
 
-            Assert.AreEqual(a.N, 3);
+            Assert.AreEqual(3, a.N);
 
             var c1 = container.GetInstance<IFigure>();
             var c2 = container.GetInstance<IFigure>();
@@ -40,6 +40,22 @@ namespace NUnitTest
 
             Assert.AreEqual(c1.GetSquare(), 27);
             Assert.AreEqual(c2.GetSquare(), 12);
+        }
+
+        [Test]
+        public void TestChangeRegistrations()
+        {
+            var container = new Container.Container();
+
+            container.Register<ICalc, Add>(Lifestyle.Singleton);
+            container.Register<ICalc, Mult>(Lifestyle.Transient);
+
+            var a = container.GetInstance<ICalc>();
+            var b = container.GetInstance<ICalc>();
+            a.Step();
+            b.Step();
+
+            Assert.AreEqual(4, a.N);
         }
     }
 }
