@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Container\Container.csproj" />
+    <ProjectReference Include="..\TestClasses\TestClasses.csproj" />
   </ItemGroup>
 
 </Project>

@@ -26,7 +26,7 @@ namespace Example
     {
         static void Main(string[] args)
         {
-            var container = new SimpleInjector.Container();
+            var container = new Container();
 
             container.Register<IAnimal, Cat>();
 
