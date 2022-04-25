@@ -1,38 +1,27 @@
 ﻿using System;
 using SimpleInjector;
-
+using SimpleInjectorExamples;
+using TestClasses;
 
 namespace Example
 {
-    interface IAnimal
-    {
-        public void Voice();
-    }
-
-    class Cat : IAnimal
-    {
-        public Cat()
-        {
-            Console.WriteLine("New Cat");
-        }
-
-        public void Voice()
-        {
-            Console.WriteLine("Maw");
-        }
-    }
-
     class Program
     {
         static void Main(string[] args)
         {
-            var container = new Container();
+            AllSimpleExamples();
+        }
 
-            container.Register<IAnimal, Cat>();
+        static void AllSimpleExamples()
+        {
+            Console.WriteLine("Registration");
+            SimpleExamples.Registration();
 
-            var a = container.GetInstance<IAnimal>();
-            var b = container.GetInstance<IAnimal>();
-            a.Voice();
+            Console.WriteLine("Transient");
+            SimpleExamples.TransientRegistration();
+
+            Console.WriteLine("Singleton");
+            SimpleExamples.SingletonRegistration();
         }
     }
 }
