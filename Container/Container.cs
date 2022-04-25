@@ -21,7 +21,7 @@ namespace Container
             where Interface : class
         {
             if (!instances.ContainsKey(typeof(Interface)))
-                throw new Exception("Interface is not registered");
+                throw new UnregisteredTypeException("Interface is not registered");
 
             return (Interface) instances[typeof(Interface)].GetInstance();
         }
