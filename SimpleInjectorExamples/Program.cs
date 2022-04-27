@@ -10,6 +10,7 @@ namespace Example
         static void Main(string[] args)
         {
             AllSimpleExamples();
+            CyclicDependenciesExamples();
         }
 
         static void AllSimpleExamples()
@@ -22,6 +23,12 @@ namespace Example
 
             Console.WriteLine("Singleton");
             SimpleExamples.SingletonRegistration();
+        }
+
+        static void CyclicDependenciesExamples()
+        {
+            Console.WriteLine("Cyclic");
+            CyclicDependencies.Registration();
         }
     }
 }
