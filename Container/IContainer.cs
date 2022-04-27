@@ -23,5 +23,8 @@ namespace Container
             where Interface : class;
 
         public void CheckCyclicDependencies();
+
+        public void BeginNewScope();
+        public void EndOfScope();
     }
 }
