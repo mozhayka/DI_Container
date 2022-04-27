@@ -54,5 +54,12 @@ namespace Container.MyContainerDir
             }
             return ScopedObjects[scope];
         }
+
+        public void CheckCyclicDependencies()
+        {
+            CyclicDependencies cd = new(RType);
+            if (cd.Check() == false)
+                throw new CyclicDependenceException($"{RType} is a cyclic type");
+        }
     }
 }

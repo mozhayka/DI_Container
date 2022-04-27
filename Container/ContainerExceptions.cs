@@ -11,4 +11,10 @@ namespace Container
         public UnregisteredTypeException(string message)
             : base(message) { }
     }
+
+    public class CyclicDependenceException : Exception
+    {
+        public CyclicDependenceException(string message)
+            : base(message) { }
+    }
 }

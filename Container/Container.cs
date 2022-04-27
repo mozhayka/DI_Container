@@ -32,5 +32,13 @@ namespace Container
         {
             instances[typeof(Interface)] = new(typeof(Interface), typeof(Realization), lifestyle);
         }
+
+        public void CheckCyclicDependencies()
+        {
+            foreach (var instance in instances.Values)
+            {
+                instance.CheckCyclicDependencies();
+            }
+        }
     }
 }
