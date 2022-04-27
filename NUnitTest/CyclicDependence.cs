@@ -27,5 +27,22 @@ namespace NUnitTest
 
             Assert.IsFalse(cd.Check());
         }
+
+        [Test]
+        public void TestRegisterCyclicClass()
+        {
+            var container = new Container.Container();
+            container.Register<I, A>();
+
+            try
+            {
+                container.CheckCyclicDependencies();
+            }
+            catch (CyclicDependenceException)
+            {
+                return;
+            }
+            Assert.Fail("Container didn't find cyclic dependence");
+        }
     }
 }

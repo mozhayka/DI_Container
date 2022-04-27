@@ -21,5 +21,7 @@ namespace Container
 
         public Interface GetInstance<Interface>()
             where Interface : class;
+
+        public void CheckCyclicDependencies();
     }
 }
