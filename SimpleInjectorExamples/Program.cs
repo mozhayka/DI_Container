@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using SimpleInjector;
 using SimpleInjectorExamples;
 using TestClasses;

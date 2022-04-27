@@ -40,15 +40,5 @@ namespace Container
                 instance.CheckCyclicDependencies();
             }
         }
-
-        public void BeginNewScope()
-        {
-            Scope.OpenNewScope();
-        }
-
-        public void EndOfScope()
-        {
-            Scope.CloseScope();
-        }
     }
 }

@@ -6,30 +6,11 @@ using System.Threading.Tasks;
 
 namespace Container.MyContainerDir
 {
-    static class Scope
+    class Scope
     {
-        static StringBuilder scope = new("scope_0");
-        static int n = 1;
         public static string GetScope()
         {
-            return scope.ToString();
-        }
-
-        public static void OpenNewScope()
-        {
-            n++;
-            scope.Append($"_{n}");
-        }
-
-        public static void CloseScope()
-        {
-            var str = scope.ToString();
-            int len = str.Length, i = 1;
-            while (str[len - i] != '_')
-            {
-                i++;
-            }
-            scope.Remove(len - i, i);
+            return Environment.CurrentDirectory;
         }
     }
 }
