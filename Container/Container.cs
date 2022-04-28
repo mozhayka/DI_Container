@@ -1,5 +1,4 @@
-﻿using Container.MyContainerDir;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,14 +40,19 @@ namespace Container
             }
         }
 
-        public void BeginNewScope()
+        public void OpenScope()
         {
             Scope.OpenNewScope();
         }
 
-        public void EndOfScope()
+        public void CloseScope()
         {
             Scope.CloseScope();
+        }
+
+        public DisposableScope BeginLifetimeScope()
+        {
+            return new DisposableScope();
         }
     }
 }

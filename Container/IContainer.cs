@@ -24,7 +24,8 @@ namespace Container
 
         public void CheckCyclicDependencies();
 
-        public void BeginNewScope();
-        public void EndOfScope();
+        public void OpenScope();
+        public void CloseScope();
+        public DisposableScope BeginLifetimeScope();
     }
 }

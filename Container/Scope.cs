@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Container.MyContainerDir
+namespace Container
 {
     static class Scope
     {
@@ -30,6 +30,19 @@ namespace Container.MyContainerDir
                 i++;
             }
             scope.Remove(len - i, i);
+        }
+    }
+
+    public class DisposableScope : IDisposable
+    {
+        public DisposableScope()
+        {
+            Scope.OpenNewScope();
+        }
+
+        public void Dispose()
+        {
+            Scope.CloseScope();
         }
     }
 }
