@@ -6,11 +6,6 @@ namespace NUnitTest
 {
     class SimpleTests
     {
-        [SetUp]
-        public void Setup()
-        {
-
-        }
 
         [Test]
         public void TestTransient()

@@ -11,7 +11,8 @@ namespace Example
         static void Main(string[] args)
         {
             AllSimpleExamples();
-            CyclicDependenciesExamples();
+            // CyclicDependenciesExamples();
+            ScopedLifestyleExamples();
         }
 
         static void AllSimpleExamples()
@@ -30,6 +31,12 @@ namespace Example
         {
             Console.WriteLine("Cyclic");
             CyclicDependencies.Registration();
+        }
+
+        static void ScopedLifestyleExamples()
+        {
+            Console.WriteLine("Scoped");
+            ScopedLifestyleEx.ScopedRegistration();
         }
     }
 }

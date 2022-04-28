@@ -6,12 +6,6 @@ namespace NUnitTest
 {
     class AdvancedTests
     {
-        [SetUp]
-        public void Setup()
-        {
-
-        }
-
         [Test]
         public void TestMultipleRegistrations()
         {
