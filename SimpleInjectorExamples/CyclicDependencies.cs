@@ -16,6 +16,7 @@ namespace SimpleInjectorExamples
 
             container.Register<I, A>();
 
+            container.Verify();
             Console.WriteLine("Get instance");
             var a = container.GetInstance<I>();
         }

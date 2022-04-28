@@ -29,21 +29,20 @@ namespace NUnitTest
         }
 
         [Test]
+        public void TestEmptyContainer()
+        {
+            var container = new Container.Container();
+
+            Assert.IsFalse(CyclicCheck.IsCyclic(container));
+        }
+
+        [Test]
         public void TestRegisterCyclicClass()
         {
             var container = new Container.Container();
             container.Register<I, A>();
 
             Assert.IsTrue(CyclicCheck.IsCyclic(container));
-            try
-            {
-                container.CheckCyclicDependencies();
-            }
-            catch (CyclicDependenceException)
-            {
-                return;
-            }
-            Assert.Fail("Container didn't find cyclic dependence");
         }
 
         [Test]
@@ -54,14 +53,7 @@ namespace NUnitTest
             container.Register<IFigure, Circle>(IContainer.Lifestyle.Singleton);
             container.Register<ICalc, Add>(IContainer.Lifestyle.Scoped);
 
-            try
-            {
-                container.CheckCyclicDependencies();
-            }
-            catch (CyclicDependenceException)
-            {
-                Assert.Fail("Container don't have cyclic dependence, but failed");
-            }
+            Assert.IsFalse(CyclicCheck.IsCyclic(container));
         }
 
         [Test]
@@ -72,15 +64,7 @@ namespace NUnitTest
             container.Register<IFigure, Circle>(IContainer.Lifestyle.Singleton);
             container.Register<I, A>(IContainer.Lifestyle.Scoped);
 
-            try
-            {
-                container.CheckCyclicDependencies();
-            }
-            catch (CyclicDependenceException)
-            {
-                return;
-            }
-            Assert.Fail("Container didn't find cyclic dependence");
+            Assert.IsTrue(CyclicCheck.IsCyclic(container));
         }
 
         [Test]
@@ -89,15 +73,7 @@ namespace NUnitTest
             var container = new Container.Container();
             container.Register<I, C>();
 
-            try
-            {
-                container.CheckCyclicDependencies();
-            }
-            catch (CyclicDependenceException)
-            {
-                return;
-            }
-            Assert.Fail("Container didn't find cyclic dependence");
+            Assert.IsTrue(CyclicCheck.IsCyclic(container));
         }
 
         [Test]
@@ -106,15 +82,16 @@ namespace NUnitTest
             var container = new Container.Container();
             container.Register<I, C1>();
 
-            try
-            {
-                container.CheckCyclicDependencies();
-            }
-            catch (CyclicDependenceException)
-            {
-                return;
-            }
-            Assert.Fail("Container didn't find cyclic dependence");
+            Assert.IsTrue(CyclicCheck.IsCyclic(container));
+        }
+
+        [Test]
+        public void TestCycleC4()
+        {
+            var container = new Container.Container();
+            container.Register<I, C4>();
+
+            Assert.IsTrue(CyclicCheck.IsCyclic(container));
         }
     }
 
