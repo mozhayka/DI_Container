@@ -31,4 +31,16 @@ namespace TestClasses.CyclicDependentClasses
             a = new A();
         }
     }
+
+    public class C : I
+    {
+        private C c;
+        public C()
+        {
+            Console.WriteLine("Creating instance of C");
+            Console.WriteLine("Press enter");
+            Console.ReadLine();
+            c = new C();
+        }
+    }
 }
