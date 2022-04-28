@@ -37,6 +37,9 @@ namespace Example
         {
             Console.WriteLine("Scoped");
             ScopedLifestyleEx.ScopedRegistration();
+
+            Console.WriteLine("Double scope");
+            ScopedLifestyleEx.ScopedUsingInsideUsing();
         }
     }
 }
