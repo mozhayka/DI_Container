@@ -16,6 +16,11 @@ namespace Container
             instances = new();
         }
 
+        public Container(string fileName)
+        {
+            instances = Deserialize(fileName);
+        }
+
         public Interface GetInstance<Interface>()
             where Interface : class
         {
@@ -40,6 +45,11 @@ namespace Container
             }
         }
 
+        public void Register<T1, T2>(object singleton)
+        {
+            throw new NotImplementedException();
+        }
+
         public void OpenScope()
         {
             Scope.OpenNewScope();
@@ -53,6 +63,16 @@ namespace Container
         public DisposableScope BeginLifetimeScope()
         {
             return new DisposableScope();
+        }
+
+        public void Serialize(string outputFile = "container.xml")
+        {
+            ConfigurationXML.Serialize(instances, outputFile);
+        }
+
+        private Dictionary<Type, InstanceProducer> Deserialize(string inputFile = "container.xml")
+        {
+            return ConfigurationXML.Deserialize(inputFile);
         }
     }
 }

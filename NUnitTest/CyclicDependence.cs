@@ -50,8 +50,8 @@ namespace NUnitTest
         {
             var container = new Container.Container();
             container.Register<IAnimal, Cat>();
-            container.Register<IFigure, Circle>(IContainer.Lifestyle.Singleton);
-            container.Register<ICalc, Add>(IContainer.Lifestyle.Scoped);
+            container.Register<IFigure, Circle>(Lifestyle.Singleton);
+            container.Register<ICalc, Add>(Lifestyle.Scoped);
 
             Assert.IsFalse(CyclicCheck.IsCyclic(container));
         }
@@ -61,8 +61,8 @@ namespace NUnitTest
         {
             var container = new Container.Container();
             container.Register<IAnimal, Cat>();
-            container.Register<IFigure, Circle>(IContainer.Lifestyle.Singleton);
-            container.Register<I, A>(IContainer.Lifestyle.Scoped);
+            container.Register<IFigure, Circle>(Lifestyle.Singleton);
+            container.Register<I, A>(Lifestyle.Scoped);
 
             Assert.IsTrue(CyclicCheck.IsCyclic(container));
         }

@@ -5,15 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Container
-{
+{        
+    public enum Lifestyle
+    {
+        Singleton,
+        Transient,
+        Scoped
+    }
+
     public interface IContainer
     {
-        public enum Lifestyle
-        {
-            Singleton,
-            Transient,
-            Scoped
-        }
+
 
         public void Register<Interface, Realization>(Lifestyle lifestyle) 
             where Interface : class 

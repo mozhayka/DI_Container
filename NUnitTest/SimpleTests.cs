@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Container;
+using NUnit.Framework;
 using TestClasses;
 
 
@@ -27,7 +28,7 @@ namespace NUnitTest
         {
             var container = new Container.Container();
 
-            container.Register<ICalc, Add>(Container.IContainer.Lifestyle.Singleton);
+            container.Register<ICalc, Add>(Lifestyle.Singleton);
 
             var a = container.GetInstance<ICalc>();
             var b = container.GetInstance<ICalc>();

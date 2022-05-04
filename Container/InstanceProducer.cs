@@ -7,12 +7,13 @@ using static Container.IContainer;
 
 namespace Container
 {
-    class InstanceProducer
+    [Serializable]
+    public class InstanceProducer
     {
-        Type IType, RType;
-        Lifestyle lifestyle;
-        Func<object> instanceCreator;
-        Dictionary<string, object> ScopedObjects = new();
+        public Type IType, RType;
+        public Lifestyle lifestyle;
+        private Func<object> instanceCreator;
+        public Dictionary<string, object> ScopedObjects = new();
 
         public InstanceProducer(Type interface_type, Type realization_type, Lifestyle lifestyle)
         {
@@ -21,6 +22,8 @@ namespace Container
             this.lifestyle = lifestyle;
             InitInstanceCreator();
         }
+
+        public InstanceProducer() { }
 
         public object GetInstance()
         {
