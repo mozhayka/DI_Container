@@ -8,10 +8,11 @@ using System.Xml.Serialization;
 
 namespace Container
 {
+    public class SomeKnownType { } //Нужен для приведение строки в тип 
+
     [Serializable]
     public class Pair<K, V>
     {
-        [XmlIgnore]
         public K Key;
         public V Value;
 
@@ -28,14 +29,14 @@ namespace Container
     {
         public static void Serialize(Dictionary<Type, InstanceProducer> container, string outputFile)
         {
-            XmlSerializer formatter = new XmlSerializer(typeof(Pair<Type, SerializableInstanceProducer>[]));
+            XmlSerializer formatter = new XmlSerializer(typeof(Pair<string, SerializableInstanceProducer>[]));
 
             // сохранение массива в файл
             using FileStream fs = new(outputFile, FileMode.OpenOrCreate);
             var SerializableContainer = container
-                .Select(pair => new Pair<Type, SerializableInstanceProducer>
+                .Select(pair => new Pair<string, SerializableInstanceProducer>
                 (
-                    pair.Key,
+                    pair.Key.ToString(),
                     (SerializableInstanceProducer)pair.Value
                 )).ToArray();
             formatter.Serialize(fs, SerializableContainer);
