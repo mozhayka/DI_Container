@@ -11,6 +11,7 @@ namespace Container
     [Serializable]
     public class Pair<K, V>
     {
+        [XmlIgnore]
         public K Key;
         public V Value;
 
@@ -27,20 +28,17 @@ namespace Container
     {
         public static void Serialize(Dictionary<Type, InstanceProducer> container, string outputFile)
         {
-            //var i = (new Dictionary<Type, InstanceProducer>()).ToArray();
             XmlSerializer formatter = new XmlSerializer(typeof(Pair<Type, SerializableInstanceProducer>[]));
 
             // сохранение массива в файл
-            using (FileStream fs = new FileStream(outputFile, FileMode.OpenOrCreate))
-            {
-                var SerializableContainer = container
-                    .Select(pair => new Pair<Type, SerializableInstanceProducer>
-                    (
-                        pair.Key,
-                        (SerializableInstanceProducer)pair.Value
-                    )).ToArray();
-                formatter.Serialize(fs, SerializableContainer);
-            }
+            using FileStream fs = new(outputFile, FileMode.OpenOrCreate);
+            var SerializableContainer = container
+                .Select(pair => new Pair<Type, SerializableInstanceProducer>
+                (
+                    pair.Key,
+                    (SerializableInstanceProducer)pair.Value
+                )).ToArray();
+            formatter.Serialize(fs, SerializableContainer);
         }
 
         public static Dictionary<Type, InstanceProducer> Deserialize(string inputFile)
