@@ -1,12 +1,7 @@
 ﻿using Container;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 using TestClasses;
 
@@ -56,7 +51,7 @@ namespace NUnitTest
         }
 
         [Test]
-        public void TestDeserialize()
+        public void TestContainerDeserialize()
         {
             var container = new Container.Container();
 
@@ -66,6 +61,40 @@ namespace NUnitTest
 
             var a = cont.GetInstance<IAnimal>();
             a.Voice();
+        }
+
+        [Test]
+        public void TestContainerSerializeDeserializeLifestyles()
+        {
+            var container = new Container.Container();
+
+            container.Register<IFigure, Circle>(Lifestyle.Transient);
+            container.Register<ICalc, Add>(Lifestyle.Singleton);
+            container.Register<ICount, Counter>(Lifestyle.Scoped);
+
+            string filename = "TestXMLLifestyles.xml";
+            container.Serialize(filename);
+            var container2 = new Container.Container(filename);
+
+            var a = container2.GetInstance<IFigure>();
+            var b = container2.GetInstance<IFigure>();
+            Assert.AreNotSame(a, b);
+
+            var c = container2.GetInstance<ICalc>();
+            var d = container2.GetInstance<ICalc>();
+            Assert.AreSame(c, d);
+
+            var e = container.GetInstance<ICount>();
+            var f = container.GetInstance<ICount>();
+            Assert.AreSame(e, f);
+
+            using (container.BeginLifetimeScope())
+            {
+                var g = container.GetInstance<ICount>();
+                var h = container.GetInstance<ICount>();
+                Assert.AreNotSame(e, g);
+                Assert.AreSame(h, g);
+            }
         }
     }
 }
