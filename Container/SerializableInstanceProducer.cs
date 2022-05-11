@@ -7,7 +7,6 @@ using System.Xml.Serialization;
 
 namespace Container
 {
-    [Serializable]
     public class SerializableInstanceProducer
     {
         public string IType, RType;
@@ -16,8 +15,8 @@ namespace Container
 
         public SerializableInstanceProducer(Type IType, Type RType, Lifestyle lifestyle, Dictionary<string, object> ScopedObjects)
         {
-            this.IType = IType.ToString();
-            this.RType = RType.ToString();
+            this.IType = Conv.TypeToStr(IType);
+            this.RType = Conv.TypeToStr(RType);
             this.lifestyle = lifestyle;
             this.ScopedObjects = ScopedObjects
                 .Select(x => new Pair<string, object>
@@ -34,9 +33,9 @@ namespace Container
             return new SerializableInstanceProducer(x.IType, x.RType, x.lifestyle, x.ScopedObjects);
         }
 
-        //public static implicit operator InstanceProducer(SerializableInstanceProducer x)
-        //{
-        //    return new InstanceProducer(x.IType, x.RType, x.lifestyle, x.ScopedObjects.ToDictionary(pair => pair.Key, pair => pair.Value));
-        //}
+        public static implicit operator InstanceProducer(SerializableInstanceProducer x)
+        {
+            return new InstanceProducer(Conv.StrToType(x.IType), Conv.StrToType(x.RType), x.lifestyle, x.ScopedObjects.ToDictionary(pair => pair.Key, pair => pair.Value));
+        }
     }
 }
