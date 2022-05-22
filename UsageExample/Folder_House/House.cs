@@ -43,4 +43,33 @@ namespace UsageExample
             throw new NotImplementedException();
         }
     }
+
+    class SimpleHouse : House
+    {
+        List<Window> windows;
+        Door door;
+
+        public SimpleHouse()
+        {
+            windows = new();
+        }
+
+        public void AddWindow()
+        {
+            windows.Add(DIContainer.container.GetInstance<Window>());
+        }
+
+        public void Print()
+        {
+            Console.WriteLine($"This house has door");
+            door.Print();
+            Console.WriteLine($"and {windows.Count} windows");
+            windows.ForEach(w => w.Print());
+        }
+
+        public void SetDoor()
+        {
+            door = DIContainer.container.GetInstance<Door>();
+        }
+    }
 }
