@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUnitTest", "..\NUnitTest\N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleInjectorExamples", "..\SimpleInjectorExamples\SimpleInjectorExamples.csproj", "{D53D0760-3007-4BB0-870B-7C514B0F762F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClasses", "..\TestClasses\TestClasses.csproj", "{58537420-4A87-4105-AAF1-3EADD806A1CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestClasses", "..\TestClasses\TestClasses.csproj", "{58537420-4A87-4105-AAF1-3EADD806A1CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageExample", "..\UsageExample\UsageExample.csproj", "{9DE1E14A-D825-4367-9EB7-E04B128AD305}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{58537420-4A87-4105-AAF1-3EADD806A1CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58537420-4A87-4105-AAF1-3EADD806A1CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58537420-4A87-4105-AAF1-3EADD806A1CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DE1E14A-D825-4367-9EB7-E04B128AD305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DE1E14A-D825-4367-9EB7-E04B128AD305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DE1E14A-D825-4367-9EB7-E04B128AD305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DE1E14A-D825-4367-9EB7-E04B128AD305}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

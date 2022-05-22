@@ -13,13 +13,13 @@ namespace Container
         public Lifestyle lifestyle;
         private Func<object> instanceCreator;
         public Dictionary<string, object> ScopedObjects;
+        private bool IsInitiatedInstanceCreator = false;
 
         public InstanceProducer(Type interface_type, Type realization_type, Lifestyle lifestyle)
         {
             IType = interface_type;
             RType = realization_type;
             this.lifestyle = lifestyle;
-            InitInstanceCreator();
             ScopedObjects = new();
         }
 
@@ -28,12 +28,13 @@ namespace Container
             IType = interface_type;
             RType = realization_type;
             this.lifestyle = lifestyle;
-            InitInstanceCreator();
             this.ScopedObjects = ScopedObjects;
         }
 
         public object GetInstance()
         {
+            if (!IsInitiatedInstanceCreator)
+                InitInstanceCreator();
             return instanceCreator();
         }
 
@@ -52,6 +53,7 @@ namespace Container
                     instanceCreator = () => InstanceCreatorScoped();
                     break;
             }
+            IsInitiatedInstanceCreator = true;
         }
 
         private object InstanceCreatorScoped()
