@@ -56,7 +56,7 @@ namespace NUnitTest
             var container = new Container.Container();
 
             container.Register<IAnimal, Cat>();
-            string filename = "container.xml";
+            string filename = "container.xml"; //если не сразу проходит тест, стоит попробовать запустить еще раз, чтобы файл xml был правильно сгенерирован
             var cont = new Container.Container(filename);
 
             var a = cont.GetInstance<IAnimal>();

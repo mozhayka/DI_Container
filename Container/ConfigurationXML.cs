@@ -40,30 +40,30 @@ namespace Container
 
     public static class ConfigurationXML
     {    
-        public static void Serialize(Dictionary<Type, InstanceProducer> container, string outputFile)
+        public static void Serialize(Dictionary<Type, List<InstanceProducer>> container, string outputFile)
         {
-            XmlSerializer formatter = new(typeof(Pair<string, SerializableInstanceProducer>[]));
+            XmlSerializer formatter = new(typeof(Pair<string, SerializableInstanceProducer[]>[]));
 
             // сохранение массива в файл
             using FileStream fs = new(outputFile, FileMode.Create);
 
             var SerializableContainer = container
-                .Select(pair => new Pair<string, SerializableInstanceProducer>
+                .Select(pair => new Pair<string, SerializableInstanceProducer[]>
                 (
                     Conv.TypeToStr(pair.Key),
-                    pair.Value
+                    pair.Value.Select(x => (SerializableInstanceProducer)x).ToArray()
                 )).ToArray();
 
             formatter.Serialize(fs, SerializableContainer);
         }
 
-        public static Dictionary<Type, InstanceProducer> Deserialize(string inputFile)
+        public static Dictionary<Type, List<InstanceProducer>> Deserialize(string inputFile)
         {
-            XmlSerializer formatter = new(typeof(Pair<string, SerializableInstanceProducer>[]));
+            XmlSerializer formatter = new(typeof(Pair<string, SerializableInstanceProducer[]>[]));
             using FileStream fs = new(inputFile, FileMode.OpenOrCreate);
 
-            var newpeople = formatter.Deserialize(fs) as Pair<string, SerializableInstanceProducer>[];
-            return newpeople.ToDictionary(pair => Conv.StrToType(pair.Key), pair => (InstanceProducer)pair.Value);
+            var newpeople = formatter.Deserialize(fs) as Pair<string, SerializableInstanceProducer[]>[];
+            return newpeople.ToDictionary(pair => Conv.StrToType(pair.Key), pair => pair.Value.Select(x => (InstanceProducer)x).ToList());
         }
     }
 }

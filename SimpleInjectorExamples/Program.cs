@@ -41,5 +41,8 @@ namespace Example
             Console.WriteLine("Double scope");
             ScopedLifestyleEx.ScopedUsingInsideUsing();
         }
+
+        // Simple Injector doesn't support XML based configuration
+        // https://simpleinjector.readthedocs.org/en/latest/decisions.html#no-support-for-xml
     }
 }

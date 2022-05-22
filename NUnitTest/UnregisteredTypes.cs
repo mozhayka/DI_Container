@@ -11,12 +11,6 @@ namespace NUnitTest
 {
     class UnregisteredTypes
     {
-        [SetUp]
-        public void Setup()
-        {
-
-        }
-
         [Test]
         public void TestUnregisteredType()
         {
