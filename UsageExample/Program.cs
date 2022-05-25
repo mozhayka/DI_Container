@@ -88,7 +88,7 @@ namespace UsageExample
             house.RobThisHouse();
         }
 
-        static void Example4()
+        static void Example2_TimeTest()
         {            
             Stopwatch stopWatch = new();
             stopWatch.Start();
@@ -117,7 +117,7 @@ namespace UsageExample
 
         static void Main(string[] args)
         {
-            Example4();
+            Example2_TimeTest();
         }
     }
 }
