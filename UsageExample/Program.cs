@@ -27,14 +27,14 @@ namespace UsageExample
         //}
 
         //EXAMPLE 2
-        public static Container.Container container;
-        public static void CompositionRoot()
-        {
-            container = new Container.Container();
-            container.Register<House, SimpleHouse>(Container.Lifestyle.Singleton);
-            container.Register<Door, SimpleDoor>(Container.Lifestyle.Singleton);
-            container.Register<Window, SimpleWindow>();
-        }
+        //public static Container.Container container;
+        //public static void CompositionRoot()
+        //{
+        //    container = new Container.Container();
+        //    container.Register<House, SimpleHouse>(Container.Lifestyle.Singleton);
+        //    container.Register<Door, SimpleDoor>(Container.Lifestyle.Singleton);
+        //    container.Register<Window, SimpleWindow>();
+        //}
 
         //public static SimpleInjector.Container container;
         //public static void CompositionRoot()
@@ -44,6 +44,16 @@ namespace UsageExample
         //    container.Register<Door, SimpleDoor>(SimpleInjector.Lifestyle.Singleton);
         //    container.Register<Window, SimpleWindow>();
         //}
+
+        //EXAMPLE 3
+        public static Container.Container container;
+        public static void CompositionRoot()
+        {
+            container = new Container.Container();
+            container.Register<UnprotectedHouse, SimpleHouse>(Container.Lifestyle.Singleton);
+            container.Register<Door, DurableDoor>(Container.Lifestyle.Singleton);
+            container.Register<Window, SimpleWindow>();
+        }
     }
 
     static class Program
@@ -68,9 +78,18 @@ namespace UsageExample
             house.Print();
         }
 
+        static void Example3()
+        {
+            DIContainer.CompositionRoot();
+            UnprotectedHouse house = DIContainer.container.GetInstance<UnprotectedHouse>();
+            house.SetDoor();
+            house.Print();
+            house.RobThisHouse();
+        }
+
         static void Main(string[] args)
         {
-            Example2();
+            Example3();
         }
     }
 }

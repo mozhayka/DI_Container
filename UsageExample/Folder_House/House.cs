@@ -13,6 +13,11 @@ namespace UsageExample
         public void Print();
     }
 
+    interface UnprotectedHouse : House
+    {
+        public void RobThisHouse();
+    }
+
     class HouseWithoutDoors : House
     {
         List<Window> windows;
@@ -44,7 +49,7 @@ namespace UsageExample
         }
     }
 
-    class SimpleHouse : House
+    class SimpleHouse : House, UnprotectedHouse
     {
         List<Window> windows;
         Door door;
@@ -70,6 +75,22 @@ namespace UsageExample
         public void SetDoor()
         {
             door = DIContainer.container.GetInstance<Door>();
+        }
+
+        public void RobThisHouse()
+        {
+            try
+            {
+                door.KnockDown();
+                Console.WriteLine("Inside the house");
+                windows[0].Open();
+                Console.WriteLine("Success");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Fail");
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

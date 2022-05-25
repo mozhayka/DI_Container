@@ -45,7 +45,37 @@ namespace UsageExample
 
         public void Print()
         {
-            Console.WriteLine($"Door is {(IsBroken ? "broken" : (IsOpened ? "opened" : "closed"))}");
+            Console.WriteLine($"Simple door is {(IsBroken ? "broken" : (IsOpened ? "opened" : "closed"))}");
+        }
+    }
+
+    class DurableDoor : Door
+    {
+        public bool IsOpened { get; private set; }
+
+        public DurableDoor()
+        {
+            IsOpened = false;
+        }
+
+        public void Close()
+        {
+            IsOpened = false;
+        }
+
+        public void KnockDown()
+        {
+            throw new Exception("Failed to break this door");
+        }
+
+        public void Open()
+        {
+            IsOpened = true;
+        }
+
+        public void Print()
+        {
+            Console.WriteLine($"Durable door is {(IsOpened ? "opened" : "closed")}");
         }
     }
 }
